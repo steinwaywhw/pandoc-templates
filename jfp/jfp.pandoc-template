@@ -20,15 +20,15 @@
 \usepackage{natbib}
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$jfp$endif$}
 
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
 
 % $if(listings)$
 % \usepackage{listings}
 % $endif$
 % $if(lhs)$
 % \lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
-% $endif$
-% $if(highlighting-macros)$
-% $highlighting-macros$
 % $endif$
 % $if(verbatim-in-note)$
 % \usepackage{fancyvrb}
@@ -200,8 +200,6 @@ $if(biblio-title)$
 $endif$
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 $endif$
-
-
 
 % include-after
 $for(include-after)$
