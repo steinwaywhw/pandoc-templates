@@ -208,11 +208,15 @@ $endif$
 
 
 % author {name, affiliation, email}
+$if(author)$
 $for(author)$
 \authorinfo{$author.name$}
            {$author.affiliation$}
            $if(author.email)${$author.email$}$endif$
 $endfor$
+$else$
+\authorinfo{}{}{}
+$endif$
 
 $if(title)$
 \maketitle
