@@ -76,9 +76,6 @@ $for(header-includes)$
 $header-includes$
 $endfor$
 
-
-
-
 % $if(listings)$
 % \usepackage{listings}
 % $endif$
@@ -183,10 +180,10 @@ $endif$
 % \copyrightdata{978-1-nnnn-nnnn-n/yy/mm}
 % \copyrightdoi{nnnnnnn.nnnnnnn}
 
-\conferenceinfo{CONF 'yy}{Month d--d, 20yy, City, ST, Country}
-\copyrightyear{20yy}
-\copyrightdata{978-1-nnnn-nnnn-n/yy/mm}
-\copyrightdoi{nnnnnnn.nnnnnnn}
+% \conferenceinfo{CONF 'yy}{Month d--d, 20yy, City, ST, Country}
+% \copyrightyear{20yy}
+% \copyrightdata{978-1-nnnn-nnnn-n/yy/mm}
+% \copyrightdoi{nnnnnnn.nnnnnnn}
 
 % Uncomment the publication rights you want to use.
 %\publicationrights{transferred}
