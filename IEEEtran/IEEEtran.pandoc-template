@@ -616,8 +616,13 @@ $body$
 %\bibliographystyle{IEEEtran}
 % argument is your BibTeX string definitions and bibliography database(s)
 %\bibliography{IEEEabrv,../bib/paper}
+
+$if(nobib)$
+$else$
 \bibliographystyle{$if(biblio-style)$$biblio-style$$else$IEEEtran$endif$}
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+$endif$
+
 %
 % <OR> manually copy in the resultant .bbl file
 % set second argument of \begin to the number of references
