@@ -9,17 +9,18 @@ SRC=./
 INPUT=*.md 
 BIB=./library.bib
 
-# SILENT=-interaction=batchmode
+# SILENT=
+SILENT=-interaction=batchmode
 
 NAME=submission
 
 all: pdf 
 
 # copy files into build folder
-prepare: $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
+prepare: pandoc $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
 	mkdir -p $(BUILD) 
 	mkdir -p $(OUTPUT)
-	cp -rf $(PANDOC)/$(TEMPLATE)/* $(BUILD)/
+	cp -rf $(PANDOC)/$(TEMPLATE)/$(TEMPLATE).pandoc-template $(BUILD)/
 	cp -rf $(INCLUDE)/* $(BUILD)/
 	cp $(BIB) $(BUILD)/
 
@@ -76,7 +77,7 @@ clean:
 docker: 
 	docker run --rm -ti --volume=$$(pwd):/tmp/src steinwaywhw/pandoc
 
-pandoc: 
+pandoc: /tmp/pandoc-templates
 	cd /tmp && git clone https://github.com/steinwaywhw/pandoc-templates
 	cd /tmp/src
 
