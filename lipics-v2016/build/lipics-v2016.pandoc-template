@@ -83,8 +83,7 @@ $endif$
 %% Please provide for each author the \author and \affil macro, even when authors have the same affiliation, i.e. for each author there needs to be the  \author and \affil macros
 $for(author)$
 \author[$author.seq$]{$author.name$}
-\affil[$author.seq$]{$author.affiliation$}\\ 
-	\texttt{$author.email$}
+\affil[$author.seq$]{$author.affiliation$\\\texttt{$author.email$}}
 $endfor$
 \authorrunning{$authorrunning$}
 % \author[1]{John Q. Open}

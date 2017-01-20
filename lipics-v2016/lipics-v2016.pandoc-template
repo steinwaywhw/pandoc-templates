@@ -98,12 +98,12 @@ $endfor$
 % \Copyright{John Q. Open and Joan R. Access}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
 $if(subjclass)$
-\subjclass{$for(subjclass)$$subjclass$$sep$;$endfor$}
+\subjclass{$for(subjclass)$$subjclass$$sep$; $endfor$}
 $endif$
 % \subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
 
 $if(keywords)$
-\keywords{$for(keywords)$$keywords$$sep$,$endfor$}
+\keywords{$for(keywords)$$keywords$$sep$, $endfor$}
 $endif$
 % \keywords{Dummy keyword -- please provide 1--5 keywords}% mandatory: Please provide 1-5 keywords
 % Author macros::end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
