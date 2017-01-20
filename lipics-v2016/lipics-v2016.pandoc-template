@@ -97,8 +97,8 @@ $endfor$
 \Copyright{$copyright$}
 % \Copyright{John Q. Open and Joan R. Access}%mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
 
-$if(subjclass)$
-\subjclass{$for(subjclass)$$subjclass$$sep$; $endfor$}
+$if(subjclasses)$
+\subjclass{$for(subjclasses)$$subjclasses$$sep$; $endfor$}
 $endif$
 % \subjclass{Dummy classification -- please refer to \url{http://www.acm.org/about/class/ccs98-html}}% mandatory: Please choose ACM 1998 classifications from http://www.acm.org/about/class/ccs98-html . E.g., cite as "F.1.1 Models of Computation". 
 
@@ -111,12 +111,12 @@ $endif$
 %Editor-only macros:: begin (do not touch as author)%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \EventEditors{John Q. Open and Joan R. Acces}
 \EventNoEds{2}
-\EventLongTitle{42nd Conference on Very Important Topics (CVIT 2016)}
-\EventShortTitle{CVIT 2016}
-\EventAcronym{CVIT}
-\EventYear{2016}
-\EventDate{December 24--27, 2016}
-\EventLocation{Little Whinging, United Kingdom}
+\EventLongTitle{$event.longtitle$}
+\EventShortTitle{$event.shorttitle$}
+\EventAcronym{$event.acronym$}
+\EventYear{$event.year$}
+\EventDate{$event.date$}
+\EventLocation{$event.location$}
 \EventLogo{}
 \SeriesVolume{42}
 \ArticleNo{23}

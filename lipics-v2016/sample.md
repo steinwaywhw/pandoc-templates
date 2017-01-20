@@ -1,6 +1,6 @@
 ---
 title:         LIPIcs 2016 Quickstart
-titlerunning:      A Brief Introduction
+titlerunning:  A Brief Introduction
 author:
   - seq:         1
     name:        Hanwen Wu
@@ -18,9 +18,9 @@ classoption:
   - USenglish
 bibliography: ./library
 colorlinks: true
-subjclass:
-  - F.1.2 Modes of Computation: Parallelism and concurrency
-  - F.4.1 Mathematical Logic: Lambda calculus and related systems
+subjclasses:
+  - "F.1.2 Modes of Computation: Parallelism and concurrency"
+  - "F.4.1 Mathematical Logic: Lambda calculus and related systems"
 keywords:
   - pandoc 
   - LIPIcs
@@ -28,4 +28,11 @@ abstract:
     This report is a guide for using `pandoc` template 
     for _LIPIcs_ submission. It comes with 
     necessary `makefile`, templates, etc.
+event:
+  longtitle: "28th International Conference on Concurrency Theory"
+  shorttitle: "CONCUR 2017"
+  acronym: "CONCUR"
+  year: 2017
+  date: "September 4--9, 2017"
+  location: "Berlin, German"
 ---

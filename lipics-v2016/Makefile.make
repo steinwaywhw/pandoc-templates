@@ -3,7 +3,7 @@
 BUILD=./build
 OUTPUT=./output
 INCLUDE=./include
-PANDOC=/tmp/pandoc-templates
+PANDOC=../../pandoc-templates
 TEMPLATE=lipics-v2016
 SRC=./
 INPUT=*.md 
@@ -19,7 +19,7 @@ all: pdf
 prepare: $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
 	mkdir -p $(BUILD) 
 	mkdir -p $(OUTPUT)
-	cp -rf $(PANDOC)/$(TEMPLATE)/* $(BUILD)/
+	cp -rf $(PANDOC)/$(TEMPLATE)/*.pandoc-template $(PANDOC)/$(TEMPLATE)/*.cls $(BUILD)/
 	cp -rf $(INCLUDE)/* $(BUILD)/
 	cp $(BIB) $(BUILD)/
 
