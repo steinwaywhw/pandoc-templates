@@ -56,7 +56,7 @@ $abstract$
 %% AND THE LINE BELOW (\end{thebibliography})
 
 % \end{thebibliography}
-
+\bibliographystyle{asl}
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 
 
