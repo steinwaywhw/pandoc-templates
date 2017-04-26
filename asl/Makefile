@@ -12,48 +12,38 @@ NAME=submission
 
 # SILENT=-interaction=batchmode
 
-all: pdfbib
+all: pdf
 
 # copy files into build folder
-prepare: $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
+prepare: $(PANDOC)/$(TEMPLATE)/* 
 	mkdir -p $(BUILD) 
 	mkdir -p $(OUTPUT)
-	cp -rf $(PANDOC)/$(TEMPLATE)/* $(BUILD)/
-	cp -rf $(INCLUDE)/* $(BUILD)/
+	cp -rf $(PANDOC)/$(TEMPLATE)/*.cls $(PANDOC)/$(TEMPLATE)/*.pandoc-template $(PANDOC)/$(TEMPLATE)/*.bst $(BUILD)/
 	cp $(BIB) $(BUILD)/
 
 # generate tex file
 tex: prepare $(SRC)/*.md 
 	pandoc \
 		-f markdown+raw_tex \
-		-t json \
+		-t latex \
 		--smart \
 		--highlight-style=pygments \
-		$(SRC)/$(INPUT) \
-	# | python3 $(INCLUDE)/preserve_comments.py 
-	| pandoc \
-		-f json \
 		-t latex \
 		-o $(BUILD)/$(NAME).tex \
 		-s \
-		# -H $(INCLUDE)/header.tex 
-		# -B $(INCLUDE)/before.tex 
-		# -A $(INCLUDE)/after.tex 
 		--template=$(PANDOC)/$(TEMPLATE)/$(TEMPLATE).pandoc-template \
 		--highlight-style=pygments \
-		--latex-engine=xelatex 
-
-	# perl -i -p0e 's/^\n% *\n/%/gm' $(BUILD)/$(NAME).tex
-
+		--latex-engine=xelatex \
+		$(SRC)/$(INPUT) 
 
 bib: tex  
 	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex 
 	cd $(BUILD) && bibtex $(NAME)
 
-# pdf: tex bib  
-	# cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
-	# cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
-	# cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
+pdf: tex bib  
+	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
+	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
+	cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
 
 texbib: tex bib
 	sed -i -e "/^\\\\bibliography{.*}$$/r $(BUILD)/$(NAME).bbl" -e "//d" $(BUILD)/$(NAME).tex
