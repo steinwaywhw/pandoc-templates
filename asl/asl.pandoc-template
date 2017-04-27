@@ -57,7 +57,7 @@ $body$
 
 % \end{thebibliography}
 
-\bibliographystyle{asl}
+\bibliographystyle{$if(bibstyle)$$bibstyle$$else$asl$endif$}
 \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
 
 

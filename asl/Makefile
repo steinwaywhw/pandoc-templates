@@ -12,7 +12,7 @@ NAME=submission
 
 # SILENT=-interaction=batchmode
 
-all: pdf
+all: pdfbib
 
 # copy files into build folder
 prepare: $(PANDOC)/$(TEMPLATE)/* 
@@ -33,23 +33,26 @@ tex: prepare $(SRC)/*.md
 		-s \
 		--template=$(PANDOC)/$(TEMPLATE)/$(TEMPLATE).pandoc-template \
 		--highlight-style=pygments \
-		--latex-engine=xelatex \
+		--latex-engine=pdflatex \
 		$(SRC)/$(INPUT) 
 
 bib: tex  
-	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex 
+	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cd $(BUILD) && bibtex $(NAME)
 
 pdf: tex bib  
-	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
+	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex
 	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
 
 texbib: tex bib
 	sed -i -e "/^\\\\bibliography{.*}$$/r $(BUILD)/$(NAME).bbl" -e "//d" $(BUILD)/$(NAME).tex
+	sed -i -e "s/^\\\\begin{thebibliography}{}/\\\\begin{thebibliography}{9}/" $(BUILD)/$(NAME).tex
+	# cd $(BUILD) && rm *.aux *.log *.bbl 
 
 pdfbib: texbib 
-	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
+	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
+	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
 
