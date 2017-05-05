@@ -1,62 +1,85 @@
 
 
+PANDOC=/tmp/pandoc-templates
+TEMPLATE=bu_ece_thesis
+
 BUILD=./build
 OUTPUT=./output
 INCLUDE=./include
-PANDOC=/tmp/pandoc-templates
-TEMPLATE=asl
 SRC=./
-INPUT=abstract.md 
+INPUT=*.md 
 BIB=./library.bib
 NAME=submission
 
-# SILENT=-interaction=batchmode
+SILENT=-interaction=batchmode
 
-all: pdfbib
+all: pdf 
 
 # copy files into build folder
-prepare: $(PANDOC)/$(TEMPLATE)/* 
+prepare: $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
 	mkdir -p $(BUILD) 
 	mkdir -p $(OUTPUT)
-	cp -rf $(PANDOC)/$(TEMPLATE)/*.cls $(PANDOC)/$(TEMPLATE)/*.pandoc-template $(PANDOC)/$(TEMPLATE)/*.bst $(BUILD)/
+	cp -rf $(PANDOC)/$(TEMPLATE)/* $(BUILD)/
+	cp -rf $(INCLUDE)/* $(BUILD)/
 	cp $(BIB) $(BUILD)/
 
-# generate tex file
-tex: prepare $(SRC)/*.md 
+
+
+%.tex: %.md
 	pandoc \
 		-f markdown+raw_tex \
-		-t latex \
+		-t json \
 		--smart \
 		--highlight-style=pygments \
+		$^ \
+	| python3 $(INCLUDE)/preserve_comments.py \
+	| pandoc \
+		-f json \
+		-t latex \
+		-o $(BUILD)/$@ \
+		--highlight-style=pygments \
+		--latex-engine=xelatex 
+
+
+# generate tex file
+tex: prepare $(SRC)/$(INPUT) abstract.tex abbrv.tex
+	pandoc \
+		-f markdown+raw_tex \
+		-t json \
+		--smart \
+		--highlight-style=pygments \
+		$(SRC)/$(INPUT) \
+	| python3 $(INCLUDE)/preserve_comments.py \
+	| pandoc \
+		-f json \
 		-t latex \
 		-o $(BUILD)/$(NAME).tex \
 		-s \
+		-H $(INCLUDE)/header.tex \
+		-B $(INCLUDE)/before.tex \
+		-A $(INCLUDE)/after.tex \
 		--template=$(PANDOC)/$(TEMPLATE)/$(TEMPLATE).pandoc-template \
 		--highlight-style=pygments \
-		--latex-engine=pdflatex \
-		$(SRC)/$(INPUT) 
+		--latex-engine=xelatex 
+
+	perl -i -p0e 's/^\n% *\n/%/gm' $(BUILD)/$(NAME).tex
 
 bib: tex  
-	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
+	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex 
 	cd $(BUILD) && bibtex $(NAME)
 
 pdf: tex bib  
-	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex
+	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
 	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
 
 texbib: tex bib
 	sed -i -e "/^\\\\bibliography{.*}$$/r $(BUILD)/$(NAME).bbl" -e "//d" $(BUILD)/$(NAME).tex
-	sed -i -e "s/^\\\\begin{thebibliography}{}/\\\\begin{thebibliography}{9}/" $(BUILD)/$(NAME).tex
-	# cd $(BUILD) && rm *.aux *.log *.bbl 
 
 pdfbib: texbib 
-	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
-	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
-	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
+	cd $(BUILD) && xelatex $(SILENT) $(NAME).tex
 	cd $(BUILD) && pdflatex $(SILENT) $(NAME).tex 
 	cp $(BUILD)/$(NAME).pdf $(OUTPUT)/
-
 
 clean: 
 	rm -rf $(BUILD)

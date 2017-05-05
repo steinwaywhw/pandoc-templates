@@ -12,7 +12,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % PANDOC
 
-\usepackage{amssymb,amsmath}
+\usepackage{amssymb,amsmath,mathtools}
 % \usepackage[usenames, dvipsnames]{color}
 \usepackage{hyperref}
 \hypersetup{
