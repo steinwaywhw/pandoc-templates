@@ -3,8 +3,8 @@ classoptions:
 	- 12pt
 	- letterpaper
 documentclass: report
-title: A BU Thesis Latex Template
-author: Joe Candidate
+title: Thesis Proposal
+author: Hanwen Wu
 degree: 2
 prevdegrees:
 	- B.Eng., Tongji University, 2008
@@ -19,17 +19,17 @@ readers:
 	  name: Assaf Kfoury, Ph.D.
 	  title: Professor of Computer Science
 advisors:
-	- number: 2
-	- a: 
-		- name: Hongwei Xi, Ph.D.
-		- title: Associate Professor of Computer Science
-quote: quote 
-ack: ack
+	number: 1
+	a: 
+	  name: Hongwei Xi, Ph.D.
+	  title: Associate Professor of Computer Science
+<!-- quote: quote  -->
+<!-- ack: ack -->
 abstract: abstract
 abbrv: abbrv
-appendix: appendix
+<!-- appendix: appendix -->
 biblio: library
-cv: cv
+<!-- cv: cv -->
 colorlinks: true
 keywords: 
     - session types
@@ -37,4 +37,10 @@ keywords:
     - dependent types 
     - linear types 
     - multirole logic
+proposal: true
 ---
+
+
+
+
+\cite{Debr01}

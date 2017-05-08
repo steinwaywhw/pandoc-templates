@@ -6,12 +6,12 @@ TEMPLATE=bu_ece_thesis
 BUILD=./build
 OUTPUT=./output
 INCLUDE=./include
-SRC=./
-INPUT=*.md 
+SRC=.
+INPUT=main.md 
 BIB=./library.bib
 NAME=submission
 
-SILENT=-interaction=batchmode
+# SILENT=-interaction=batchmode
 
 all: pdf 
 
@@ -42,7 +42,7 @@ prepare: $(PANDOC)/$(TEMPLATE)/* $(INCLUDE)/* $(BIB)
 
 
 # generate tex file
-tex: prepare $(SRC)/$(INPUT) abstract.tex abbrv.tex
+tex: $(SRC)/$(INPUT) abstract.tex abbrv.tex
 	pandoc \
 		-f markdown+raw_tex \
 		-t json \

@@ -8,7 +8,7 @@
 \usepackage[intlimits]{amsmath}
 \usepackage{amsfonts,amssymb,mathtools}
 \DeclareSymbolFontAlphabet{\mathbb}{AMSb}
-\usepackage{bu_ece_thesis}
+
 \usepackage{url}
 \usepackage{fancyhdr}
 %\usepackage{fancyheadings}
@@ -22,7 +22,6 @@
 \usepackage[bf]{caption}       
 \setcaptionmargin{0.5in}
 
-\usepackage{ifthen}
 
 % \usepackage{xspace}
 % \usepackage{epstopdf} 
@@ -56,6 +55,9 @@
 %\newcommand{\chapref}[1]{Chapter~\ref{#1}}
 %\newcommand{\latex}{\LaTeX\xspace}
 %==========================================================================%
+
+
+\usepackage{bu_ece_thesis}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -127,6 +129,9 @@ $endfor$
 %   2 = Doctor of Philisophy dissertation.
 %   3 = Master of Science thesis and Doctor of Philisophy dissertation.
 \degree=$degree$
+
+% Is proposal or not
+\setboolean{proposal}{$if(proposal)$$proposal$$else$false$endif$}
 
 \prevdegrees{$for(prevdegrees)$$prevdegrees$$sep$\\$endfor$}
 
@@ -251,17 +256,6 @@ $endif$
 $if(abbrv)$
 \chapter*{List of Abbreviations}
 \begin{center}
-  % \begin{tabular}{lll}
-  %   \hspace*{2em} & \hspace*{1in} & \hspace*{4.5in} \\
-  %   CAD  & \dotfill & Computer-Aided Design \\
-  %   CO   & \dotfill & Cytochrome Oxidase \\
-  %   DOG  & \dotfill & Difference Of Gaussian (distributions) \\
-  %   FWHM & \dotfill & Full-Width at Half Maximum \\
-  %   LGN  & \dotfill & Lateral Geniculate Nucleus \\
-  %   ODC  & \dotfill & Ocular Dominance Column \\
-  %   PDF  & \dotfill & Probability Distribution Function \\
-  %   $\mathbb{R}^{2}$  & \dotfill & the Real plane \\
-  % \end{tabular}
 \input{$abbrv$}
 \end{center}
 \cleardoublepage

@@ -62,13 +62,16 @@
 % Some 12-point formats don't even make it in this category!
 % (3) YOUR NAME AND THE TITLE SHOULD ALWAYS BE IN ALL CAPS!
 
+\RequirePackage{ifthen}
+
 % Now set up the parameters for the size and location of text on the page.
 
 % The top and left margins should be 1.5in, and the bottom and right
 % margins should be 1in. The measures below are always added to 1in
 
 \hoffset = 0pt                 % Additional offset to the hidden 1in
-\voffset = 0pt                 % at left and on top
+%\voffset = 0
+\voffset = -12pt               % at left and on top
 
 \oddsidemargin 0.5in           % Additional left margin on odd-numbered pages (was 0.375in)
                                % Total left margin: 1in + 0.5in = 1.5in
@@ -78,7 +81,7 @@
 
 \textwidth 6.0in               % Leaves 1.0in right margin (was 6.1875in)
 
-\topmargin 0.6875in            % Additional top margin (to the top of the header).
+%\topmargin 0.6875in           % Additional top margin (to the top of the header).
                                % Header height and header separator add 0.5in 
                                % Total top margin: 1in + 0.5in = 1.5in
 
@@ -114,6 +117,10 @@
 
 % Number of advisors (1 or 2)
 \newcount\numadvisors
+
+% Is this a proposal or a disertation
+\newboolean{proposal}
+\setboolean{proposal}{false}
 
 % Your previous degree(s). If more than one degree, use single spacing
 \def\prevdegrees#1{\gdef\@prevdegrees{#1}}
@@ -177,11 +184,10 @@
         \bf\sffamily\begin{center}\MakeUppercase{\@title}\end{center}
         \sl\sffamily\begin{center}\MakeUppercase{\@author}\end{center}
         \rm\sffamily
-        \ifcase\degree\or\thisdegree{Master of Science}\or
-                         \thisdegree{Doctor of Philosophy}\or
-                         \thisdegree{\gdef\@degreeword{degrees}
-                           Master of Science \and Doctor of Philosophy}
-                         \fi
+        \ifcase\degree\or\thisdegree{Master of Science}
+        			  \or\thisdegree{Doctor of Philosophy}
+        			  \or\thisdegree{\gdef\@degreeword{degrees} Master of Science \and Doctor of Philosophy}
+        \fi
         \centerline{\ifcase\degree\or Thesis \or Dissertation \or Dissertation\fi
                     submitted in partial fulfillment}
         \centerline{of the requirements for the \@degreeword\ of}
@@ -208,22 +214,29 @@
 % TITLE PAGE
 % You can use the titlepage environment to do it all yourself if you
 % don't want to use \maketitle.
-\def\titlepage{\newpage \thispagestyle{empty}
+\def\titlepage{
+\newpage\thispagestyle{empty}
 \parindent 0pt
 \def\baselinestretch{1.8}
 \parskip 8pt plus 1fill
 \@normalsize
 \begin{center}
 }
-\def\endtitlepage{\end{center}\newpage}
+\def\endtitlepage{
+\end{center}\newpage
+}
 
 % Got tired of screwing around with \parskips that refuse to stretch,
 % so I manually put a \vfill after each \par.
-\def\maketitle{\begin{titlepage}
+\def\maketitle{
+\begin{titlepage}
 \pagenumbering{roman}
 \large
-\BU\\\COE\par\vfill
-\ifcase\degree\or Thesis \or Dissertation \or Dissertation \fi\par\vfill
+\BU\\
+\GRS\par\vfill
+\ifthenelse{\boolean{proposal}}
+	{\ifcase\degree\or Thesis Proposal \or Dissertation Proposal \or Dissertation Proposal \fi\par\vfill}
+	{\ifcase\degree\or Thesis \or Dissertation \or Dissertation \fi\par\vfill}
 \MakeUppercase{{\bf \@title}}\par\vfill
 by\par\vfill
 \MakeUppercase{{\bf \@author}}\\
@@ -291,7 +304,7 @@ Approved by\\[2em]
 %  (Order No. \hspace{1.0in})\\[1em] \fi
 \MakeUppercase{{\bf \@author}}\\[1em]
 \ifcase\degree\or\or
-\Bu,\ \Coe, \@degreeyear
+\Bu,\ \Grs, \@degreeyear
 \par
 
 % Major Professor: \@majorprofname, \@majorproftitle
@@ -347,7 +360,7 @@ Approved by\\[2em]
 \par
 \vspace{\baselineskip}
 \or
-\Bu,\ \Coe, \@degreeyear
+\Bu,\ \Grs, \@degreeyear
 \par
 
 % Major Professor: \@majorprofname, \@majorproftitle
@@ -515,3 +528,5 @@ minus
 \def\Bu{Boston University}
 \def\COE{COLLEGE OF ENGINEERING}
 \def\Coe{College of Engineering}
+\def\GRS{GRADUATE SCHOOL OF ARTS AND SCIENCES}
+\def\Grs{Graduate School of Arts and Sciences}
