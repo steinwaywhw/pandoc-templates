@@ -88,7 +88,7 @@
 % \titlerunning{The {\easychair} Class File}
 
 
-\usepackage[usenames, dvipsnames]{color}
+% \usepackage[usenames, dvipsnames]{color}
 \hypersetup{
   unicode=true,
   pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
