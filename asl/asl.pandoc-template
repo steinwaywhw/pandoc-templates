@@ -10,7 +10,7 @@ $for(author)$
 \author{$author.name$}
 \revauthor{$author.revname$}
 $if(author.address)$
-\address{$for($author.address$)$$author.address$$sep$\\$endfor$}
+\address{$for(author.address)$$author.address$$sep$\\$endfor$}
 $endif$
 \email{$author.email$}
 $if(author.thanks)$\thanks{$author.thanks$}$endif$
