@@ -9,7 +9,8 @@ $endfor$
 $for(author)$
 \author{$author.name$}
 \revauthor{$author.revname$}
-\address{$author.address$}
+$if(author.address)$
+\address{$\for($author.address$)$author.address$$sep$\\$endfor$}
 \email{$author.email$}
 $if(author.thanks)$\thanks{$author.thanks$}$endif$
 $if(author.url)$\urladdr{$author.url$}$endif$
