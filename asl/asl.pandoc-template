@@ -19,11 +19,11 @@ $endfor$
 
 % keywords
 $if(subjclass)$
-\subjclass[2010]{$for(subjclass)$$subjclass$$sep$;$endfor$}
+\subjclass[2010]{$for(subjclass)$$subjclass$$sep$, $endfor$}
 $endif$
 
 $if(keywords)$
-\keywords{$for(keywords)$$keywords$$sep$,$endfor$}
+\keywords{$for(keywords)$$keywords$$sep$, $endfor$}
 $endif$
 
 % title
