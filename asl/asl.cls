@@ -1,36 +1,74 @@
-% asl.cls, Version 1.2, September 14, 2000 
+% asl.cls, Version 1.3, June 7, 2002
 % Yiannis N. Moschovakis, ynm@math.ucla.edu
-% Copyright 2000 by the Association for Symbolic Logic
+% Copyright 2002 by the Association for Symbolic Logic
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% to do
+%% change font substitutions to redeclarations in xfonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 11/11/2000 Adjusted (once more) the \revemail command
+% 12/11/2000 Added \ladate, \dn and \submitformat
+%            to be implemented in aslprod.sty
+% 01/03/2001 Defined \aslsectionmark=\S
+%            and redfined \appendix so it sets it to empty
+% 01/09/01   Added \mbox{\hskip 1pt} to \tboldsymbol command
+%            which now places subscripts and superscripts
+%            correctly, in all positions
+% 02/10/01   Changed \uppercase to \MakeUppercase in \absauth
+%            to take care of \i and \j
+% 03/31/01   Made \ynm \long
+\long\def\ynm#1{} % To make comments and put invisible markers
+% 10/13/01   Adjusted the conference option
+%            so it requires only the definitions
+%             \def\copyrightyear{1000}
+%             \def\confname{Meeting}
+%             \def\editors{Unknown}
+%             \def\volume{00}
+%             \def\paperid{xx}
+%            and then it treats the articles like papers in the jsl
+% 11/16/01 Added \ycleardoublepage to all options
+% 1/1/2002 fixed bugs in revprod.sty
+% 1/2/2002 Added \@addpunct in \article (meeting)
+% 1/2/2001 Added \revdate{OK} in reviews, meeting, obituary and notices
+% 1/2/2002 Deleted [1][] from makereviewheading
+% 2/8/2002 Changed \arraycolsep to \labelsep in eqnarray
+%          environment; these are the same, and the change allows us
+%          to change \arraycolsep (which is set at 5pt) without affecting eqnarray
+% 4/1/2002 Fixed bug in \citeauth and \citeyear which required  separate \cite{?}
+%          to make these work. (Suggested by Richard Zach.)
+% 6/7/2002 Changed \textwidth and \textheight for the conference option
+%          Added the \tagsleft and \tagsright commands from tricks.tex
+%          Added aslbook and xaslbook options
+%          Added bibay3 option (to be used primarily with books)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % This file carries the usual TEX-file non-warranty for results
-% and it can be freely copied and re-distributed provided that: 
+% and it can be freely copied and re-distributed provided that:
 %
-% IF IT IS CHANGED IN THE SLIGHTEST WAY, it must be RENAMED 
+% IF IT IS CHANGED IN THE SLIGHTEST WAY, it must be RENAMED
 %
 % With code cribbed from the 1996/11/05 Version 1.2q of amsart.cls
-% and ancillary AMSLATEX packages, in 1996 versions. 
+% and ancillary AMSLATEX packages, in 1996 versions.
 % An attempt to load one of these packages gives an error message.
 % For a list of the relevant packages and versions
 % search for \errmessage below or see asldoc.
-% 
+%
 % The ASL-specific code has been adapted to latex2e by YNM from an
 % early version of AMSLATEX for the ASL prepared by the AMS
 % programming staff. This version includes the code from all
 % necessary stylefiles except for amsfonts, amssymb and latexsym
-% 
+%
 % It is assumed that all LATEX2e files exist
 % in versions not earlier than 1994/12/01
 % including latexsym.sty, which is automatically loaded.
 %
-% The packages amsfonts.sty and amssymb.sty are loaded if they 
-% exist, otherwise a warning is given that ams fonts are not 
-% available and compilation does not stop until some amsfont 
-% symbol is required.  
+% The packages amsfonts.sty and amssymb.sty are loaded if they
+% exist, otherwise a warning is given that ams fonts are not
+% available and compilation does not stop until some amsfont
+% symbol is required.
 %
-%%%%%%%%%%%%%%%% Changes 
+%%%%%%%%%%%%%%%% Changes
 % bibextra.sty minor (diagnostic) bug corrected, 4/6/00
 % Version 1.1, August 20, 2000
-% Introduced option bibother which works with 
+% Introduced option bibother which works with
 % non-asl bibliography styles and hand-set bibliographies
 %
 % Added an optional argument to \subjclass
@@ -41,8 +79,8 @@
 %%%%%%%%%%%%%%%%%
 
 \NeedsTeXFormat{LaTeX2e}% LaTeX 2.09 can't be used (nor non-LaTeX)
-[1994/12/01]% LaTeX date must December 1994 or later
-\ProvidesClass{asl}[2000/09/14 v1.2]
+[1994/12/01]% LaTeX date must be December 1994 or later
+\ProvidesClass{asl}[2002/06/07 v1.3]
 \def\@tempa#1#2\@nil{\edef\@classname{#1}}
 \expandafter\@tempa\@currnamestack{}{}{}\@nil
 \ifx\@classname\@empty \edef\@classname{\@currname}\fi
@@ -56,7 +94,7 @@
 
 \def\amsmathcase{0}
 \def\amsmathaslerr{
-\errmessage{asl.cls already knows amsmath 
+\errmessage{asl.cls already knows amsmath
 version 1.2c [1996/11/01]^^J
 and cannot load amsmath.^^J
 Hit RETURN to continue!^^J
@@ -64,7 +102,7 @@ Hit RETURN to continue!^^J
 
 \def\amsgencase{0}
 \def\amsgenaslerr{
-\errmessage{^^J asl.cls already knows amsgen 
+\errmessage{^^J asl.cls already knows amsgen
 version 1.2b [1996/10/29]^^J
 and cannot load amsgen.^^J
 Hit RETURN to continue!^^J
@@ -72,7 +110,7 @@ Hit RETURN to continue!^^J
 
 \def\amstextcase{0}
 \def\amstextaslerr{
-\errmessage{^^J asl.cls already knows amstext 
+\errmessage{^^J asl.cls already knows amstext
 version 1.2b [1996/10/28]^^J
 and cannot load amstext.^^J
 Hit RETURN to continue!^^J
@@ -80,7 +118,7 @@ Hit RETURN to continue!^^J
 
 \def\amsbsycase{0}
 \def\amsbsyaslerr{
-\errmessage{^^J asl.cls already knows amsbsy 
+\errmessage{^^J asl.cls already knows amsbsy
 version 1.2b [1996/10/29]^^J
 and cannot load amsbsy.^^J
 Hit RETURN to continue!^^J
@@ -88,7 +126,7 @@ Hit RETURN to continue!^^J
 
 \def\amsopncase{0}
 \def\amsopnaslerr{
-\errmessage{^^J asl.cls already knows amsopn 
+\errmessage{^^J asl.cls already knows amsopn
 version 1.2b [1996/10/28]^^J
 and cannot load amsopn.^^J
 Hit RETURN to continue!^^J
@@ -125,7 +163,7 @@ Hit RETURN to continue!^^J
 \DeclareOption{psamsfonts}{%
   \PassOptionsToPackage{psamsfonts}{amsfonts}%
 %  \PassOptionsToPackage{cmex10}{amsmath}}
-   \ExecuteOptions{cmex10}}     % this option is declared here 
+   \ExecuteOptions{cmex10}}     % this option is declared here
 % Commands preparatory to declaring pointsize options
 \newcommand{\@mainsize}{10}
 \newcommand{\@ptsize}{0}
@@ -409,12 +447,12 @@ Hit RETURN to continue!^^J
 \DeclareOption{reqno}{\tagsleft@false}
 % add for eqnarray in asl
 \AtBeginDocument{\iftagsleft@%
-\renewcommand\@eqnnum{\hb@xt@.01\p@{}%   
+\renewcommand\@eqnnum{\hb@xt@.01\p@{}%
                       \rlap{\normalfont\normalcolor
                         \hskip -\displaywidth(%
 %\theequation    ynm for tagging
 \ifasl@tag\tagsymbol\global\asl@tagfalse\else\theequation\fi%
-)}}\fi} 
+)}}\fi}
 
 \DeclareOption{centertags}{\ctagsplit@true}
 \DeclareOption{tbtags}{\ctagsplit@false}
@@ -2850,7 +2888,7 @@ and fix things up.}
 \def\twokname{2000}
 \newcommand\subjclass[2][]{%                 8/2000 ynm
 \def\testname{#1}\ifx\testname\twokname%
-\def\subjclassname{\textup{2000} Mathematics Subject 
+\def\subjclassname{\textup{2000} Mathematics Subject
 Classification}\fi\def\@subjclass{#2}}  % subj
 \let\@subjclass=\@empty
 \def\commby#1{\def\@commby{(Communicated by #1)}}
@@ -3185,6 +3223,7 @@ Classification}\fi\def\@subjclass{#2}}  % subj
 \def\subparagraph{\@startsection{subparagraph}{5}%
   \z@\z@{-\fontdimen2\font}%
   \normalfont}
+% This is redefined later, to handle \S ynm
 \def\appendix{\par\c@section\z@ \c@subsection\z@
    \let\sectionname\appendixname
    \def\thesection{\@Alph\c@section}}
@@ -3437,7 +3476,7 @@ Classification}\fi\def\@subjclass{#2}}  % subj
 \newskip\belowcaptionskip \belowcaptionskip=12pt \relax
 \newdimen\captionindent \captionindent=3pc
 
-%%%%%%%%%%%%%%%%%%%%%%% code from amsthm.sty 
+%%%%%%%%%%%%%%%%%%%%%%% code from amsthm.sty
 \newcommand{\theoremstyle}[1]{%
   \@ifundefined{th@#1}{%
     \PackageWarning{amsthm}{Unknown theoremstyle `#1'}%
@@ -3764,7 +3803,7 @@ Le-gendre Mar-kov-ian Noe-ther-ian No-vem-ber Rie-mann-ian Sep-tem-ber}
 \def\CopyRightOn{\global\CopyRighttrue}
 
 
-%------------------------------- The default is JSL with CMR 
+%------------------------------- The default is JSL with CMR
 %                                fonts and no logo or copyright
 
 \def\ISSN{0022-4812}
@@ -3784,7 +3823,7 @@ Le-gendre Mar-kov-ian Noe-ther-ian No-vem-ber Rie-mann-ian Sep-tem-ber}
 } % End \DeclareOption{jsl}
 
 %------------------------------- xfonts option, uses the xgt fonts
-\newif\ifxfonts  
+\newif\ifxfonts
 \xfontsfalse
 
 \DeclareOption{xfonts}{%
@@ -3884,11 +3923,10 @@ Logic}
     \fontsize{9}{11\p@}\selectfont  % the normalsize
     \@adjustvertspacing
 }
-\AtBeginDocument{\AbstractsOn}
+\AtBeginDocument{\AbstractsOn\revdate{OK}}
 
 \widowpenalty=0             % This is needed, to help with pagination
 \clubpenalty=0
-
 % The subtitle is, typically, "cosponsored by ..."
 % but it may be different, and it may have math in it
 % We put it where the Authors go
@@ -3911,9 +3949,9 @@ Logic}
 \vskip -0.5\baselineskip
 }
 
-\def\location#1{\vskip 14pt
-       {\gdef\@location{, #1}           % used by aslprod.sty
-\normalfont\large\bfseries\centering #1\endgraf}\nobreak
+\def\location#1{\global\locationtoks={, #1}%
+       \vskip 14pt
+{\normalfont\large\bfseries\centering #1\endgraf}\nobreak
                 \vskip 14\p@}
 
 \def\conferencehead#1{\vskip 14pt
@@ -3962,7 +4000,8 @@ Logic}
         \setcounter{equation}{0}\setcounter{abscounter}{0}
         \vspace{8pt}\noindent
         {\llap{\raisebox{.3ex}{\small$\blacktriangleright$\hskip\labelsep}}%
-         \uppercase{#1}}\unskip,}
+         %\uppercase{#1}}\unskip,}
+\MakeUppercase{#1}}\unskip,} \ynm{2/10/01}
 
 % For proofs, redefine \absauth
 \let\standardabsauth=\absauth
@@ -3976,7 +4015,8 @@ Logic}
 \def\affil#1{\endgraf\noindent{#1.}}
 \def\msort#1{\endgraf\noindent{\it Sorting}: #1.}
 
-\def\article#1{{\it #1}\unskip.\hspace{1em}}
+%\def\article#1{{\it #1}\unskip.\hspace{1em}} 1-2002, add addpunct
+\def\article#1{{\it #1}\unskip\@addpunct.\hspace{1em}}
 
 % Rarely, article names end with their own punctuation:
 \def\noperiodarticle#1{{\it #1}\unskip\hspace{1em}}
@@ -4030,7 +4070,7 @@ Logic}
 \LogoOn
 \CopyRightfalse
 
-\AtBeginDocument{\Notices}
+\AtBeginDocument{\Notices\revdate{OK}}
 \papertype{end notices}
 % \Notices is defined globally, as it is used in the covers
 
@@ -4082,7 +4122,7 @@ Logic}
 % with the \ProcessOptions command.
 % Here we have only the re-definition for the notices option
 % \email=\nemail is set in the \marginmark command
-% 
+%
 
 }% end \DeclareOption{notices}
 
@@ -4103,6 +4143,7 @@ Logic}
 \title{Reviews}
 \papertype{reviews}
 \typesetter{H. Enderton}
+\revdate{OK}
 
 % Setting the sizes
 
@@ -4118,12 +4159,15 @@ Logic}
 }
 \AtBeginDocument{\BookRev}
 
-\newcommand{\revaddress}[1]{\g@addto@macro\localaddresses{#1. }}%
+%\newcommand{\revaddress}[1]{\g@addto@macro\localaddresses{#1. }}%
+\newcommand{\revaddress}[1]{\g@addto@macro\localaddresses{%
+\nobreak #1. }}% debug 10/12/00
 
 \newcommand{\revemail}[1]{\if#1\@empty \else%
 \g@addto@macro\localaddresses{%
-\unskip\nobreak\hfil\penalty50%
-\hskip .5em\nobreak
+%\unskip\nobreak\hfil\penalty50% ynm debug 10/12/00
+%\hskip .5em\nobreak
+\nobreak \hskip .5em\nobreak             % ynm 11/11/00
 \hbox{#1. }\hspace*{\fill}}\fi%
 \g@addto@macro\localaddresses{\par}}
 
@@ -4175,10 +4219,10 @@ No toctitle!^^J\stop}}
 \def\toctitle#1{\gdef\@toctitle{#1}}
 \def\reviewtitle#1{\gdef\@titleindex{1}\gdef\@reviewtitle{#1}}
 
-\newcommand{\makereviewheading}[1][]%
+\newcommand{\makereviewheading}% 1-2-2002 delete [1][]
 {% \ydowrite in reprod.sty
 {\noindent\large\if\@titleindex0%
-{{\bfseries \@toctitle}\hskip 1em{#1}\vskip 3pt}%
+{{\bfseries \@toctitle}\hskip 1em\vskip 3pt}%
 \else\if\@reviewtitle\empty %
 \else{{\bfseries \@reviewtitle}}\fi\fi}}
 
@@ -4330,7 +4374,7 @@ No toctitle!^^J\stop}}
 \ExecuteOptions{bsl}
 
 % Make sure that address, email do not print
-\AtBeginDocument{\let\addresses\@empty \recdate{}}
+\AtBeginDocument{\let\addresses\@empty \recdate{}\revdate{OK}}
 
 % Redefine \author so that the names come at the end
 \let\obitauthors\@empty
@@ -4383,9 +4427,14 @@ No toctitle!^^J\stop}}
 
 \DeclareOption{conference}{%
 % Use the size of LC '98
-% and otherwise the JSL defaults  
-\textwidth=11.9cm
-\textheight=18.6cm
+% and otherwise the JSL defaults
+%\textwidth=11.9cm
+%\textheight=18.6cm
+
+% June 2002: new size for conference volumes and books
+\textwidth=11.4cm  % 06/2002, new size
+\textheight=18.0cm % 06/2002, new size
+
 %\let\ps@firstpage=\ps@empty
 % Redefine \ps@plain, used on the first page
 % to give identification and copyright
@@ -4393,6 +4442,7 @@ No toctitle!^^J\stop}}
 % These must be defined for each conference
 \def\copyrightyear{1000}
 \def\confname{Meeting}
+\def\editors{Unknown}
 
 % We set the Conference name and copyright ionfo
 % using \maketitle
@@ -4401,14 +4451,17 @@ No toctitle!^^J\stop}}
 \def\maketitle{\oldmaketitle\confinfo}
 
 \long\def\confinfo{%
+\thispagestyle{empty}
 \begin{table}[b]%
 \vbox to -\footskip{%
 \begin{minipage}[t]{\textwidth}
 \fontsize{7}{8pt}\selectfont%
-\vskip -\baselineskip
+%\vskip -\baselineskip
 \textbf{\confname}\\
-\copyright\ \copyrightyear, 
-\textsc{Association for Symbolic Logic}
+Edited by \editors\\
+\copyright\ \copyrightyear,
+\textsc{Association for Symbolic Logic \hspace{\fill}
+\fontsize{8}{9pt}\selectfont\thepage}
 \end{minipage}}
 \end{table}
 }
@@ -4421,10 +4474,332 @@ No toctitle!^^J\stop}}
 \ExecuteOptions{conference,xfonts}
 }
 
+%------------------------------------------- aslbook option
+\DeclareOption{aslbook}{%
+%\textwidth=11.9cm ynm: old size
+%\textheight=18.6cm ynm: old size
+\textwidth=11.4cm  % 06/2002, new size
+\textheight=18.0cm % 06/2002, new size
+
+% The next few commands for the headings
+
+% We need to know where we are in the book
+\newif\iffrontmatter
+\newif\ifbackmatter
+\def\frontmatter{\global\frontmattertrue%
+   \ycleardoublepage\pagenumbering{roman}\setcounter{page}{1}}
+\def\mainmatter{\global\frontmatterfalse%
+   \ycleardoublepage\pagenumbering{arabic}\setcounter{page}{1}}
+\def\backmatter{\global\backmattertrue%
+\ycleardoublepage}
+
+% Somewhat larger font for section titles
+
+\def\section{%
+% \setcounter{figure}{0}     % this causes problems
+% \setcounter{equation}{0}
+\@secstartsection{section}{1}%
+{0pt\bfseries}{20\p@\@plus3\p@}{12\p@\@plus3\p@}
+{\fontsize{11}{13pt}\bfseries}}
+
+\def\hardsection{%     \ynm{hard section}
+% \setcounter{figure}{0}     % this causes problems
+% \setcounter{equation}{0}
+\@secstartsection{section}{1}%
+{0pt\bfseries}{20\p@}{12\p@}
+{\fontsize{11}{13pt}\bfseries}}
+
+% Section titles have no \S and no indentation
+\def\@secstartsection#1#2#3#4#5#6{%
+ \if@noskipsec \leavevmode \fi
+ \par \@tempskipa #4\relax
+ \@afterindenttrue
+ \ifdim \@tempskipa <\z@ \@tempskipa -\@tempskipa
+\@afterindentfalse\fi
+ \if@nobreak \everypar{}\else
+     \addpenalty\@secpenalty\addvspace\@tempskipa\fi
+ \@ifstar{\@dblarg{\@sect{#1}{\@m}{#3}{#4}{#5}{#6}}}%
+         {\@dblarg{\@sect{#1}{#2}{#3}{#4}{#5}{#6}}}%    % \S removed
+}
+
+% We repeat this to set \sectionmark
+% The headings are not changed for \section*
+% only for numbered sections
+\def\@sect#1#2#3#4#5#6[#7]#8{%
+  \edef\@toclevel{\ifnum#2=\@m 0\else\number#2\fi}%
+  \ifnum #2>\c@secnumdepth \let\@secnumber\@empty
+  \else \@xp\let\@xp\@secnumber\csname the#1\endcsname\fi
+ \ifnum #2>\c@secnumdepth
+   \let\@svsec\@empty
+ \else
+    \refstepcounter{#1}%
+    \edef\@svsec{\ifnum#2<\@m
+       \@ifundefined{#1name}{}{%
+         \ignorespaces\csname #1name\endcsname\space}\fi
+       \@nx\textup{%
+      \@nx\@secnumfont
+          \csname the#1\endcsname.}\enspace
+    }%
+  \fi
+  \@tempskipa #5\relax
+  \ifdim \@tempskipa>\z@ % then this is not a run-in section heading
+    \begingroup #6\relax
+    \@hangfrom{\hskip #3\relax\@svsec}{\interlinepenalty\@M #8\par}%
+    \endgroup
+    \ifnum#2>\@m \else \ifx\@m#2 \else\@tocwrite{#1}{#7}\fi\fi
+  \else
+   \def\@svsechd{#6\hskip #3\@svsec
+% Change the next two lines to correct horizontal spacing
+% in the case of \section{}
+% Use \iete rather than \@ifempty to avoid expansion
+%    \@ifnotempty{#8}{\ignorespaces#8\unskip
+%    \@addpunct.}%
+%     \iete{#8}{\hskip -.4em}{\ignorespaces#8\unskip\@addpunct.}%
+    \iete{#8}{\hskip -.4em}{\ignorespaces#8\unskip\@addpunct.}%
+    \ifnum#2>\@m \else \ifx\@m#2 \else \@tocwrite{#1}{#7}\fi\fi
+  }%
+  \fi
+% The next line deals with the non* case
+%  \ifx\@m#2\else\sectionmark{#8}\fi
+ \ifx\@m#2\else\sectionmark{#7}\fi  % pick the optional name
+
+% \setcounter{figure}{0}       % initialize figures   YNM DO NOT
+% \setcounter{equation}{0} \fi % initialize equations YNM DO NOT
+  \global\@nobreaktrue
+  \@xsect{#5}}
+
+% This is used for the headings on the odd pages
+\def\sectionmark#1{\markright{\thesection. {#1}}}
+
+
+% This is used for the headings on the even pages
+\def\chaptermark#1{\global\pagestyle{headings}\iffrontmatter%
+\markboth{#1}{#1}%
+\else%
+\markboth{\thechapter. #1}{#1}\fi}
+
+\newcounter{chapter}
+\renewcommand\thechapter       {\arabic{chapter}}
+\renewcommand\thesection{\arabic{chapter}\Alph{section}}
+
+% This is mostly cribbed from amsbook.cls
+\def\chapter{\ycleardoublepage
+\setcounter{section}{0}
+\thispagestyle{plain}\global\@topnum\z@
+  \@afterindenttrue \secdef\@chapter\@schapter}
+\def\@chapter[#1]#2{\refstepcounter{chapter}%
+  \ifnum\c@secnumdepth<\z@ \let\@secnumber\@empty
+  \else \let\@secnumber\thechapter \fi
+  \typeout{\chaptername\space\@secnumber}%
+  \def\@toclevel{0}%
+  \ifx\chaptername\appendixname \@tocwriteb\tocappendix{chapter}{#2}%
+  \else \@tocwriteb\tocchapter{chapter}{#2}\fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \@makechapterhead{#2}\@afterheading}
+\def\@schapter#1{\typeout{#1}%
+  \let\@secnumber\@empty
+  \def\@toclevel{0}%
+  \ifx\chaptername\appendixname \@tocwriteb\tocappendix{chapter}{#1}%
+  \else \@tocwriteb\tocchapter{chapter}{#1}\fi
+  \chaptermark{#1}%
+  \addtocontents{lof}{\protect\addvspace{10\p@}}%
+  \addtocontents{lot}{\protect\addvspace{10\p@}}%
+  \@makeschapterhead{#1}\@afterheading}
+\def\chaptername{Chapter}
+
+% Chapter titles are somewhat smaller than ion amsbook
+% and \chaptername is in caps
+\def\@makechapterhead#1{\global\topskip 7.5pc\relax
+  \begingroup
+%  \fontsize{\@xivpt}{18}\bfseries\centering
+  \fontsize{\@xiipt}{18}\bfseries\centering
+    \ifnum\c@secnumdepth>\m@ne
+      \leavevmode \hskip-\leftskip
+      \rlap{\vbox to\z@{\vss
+          \centerline{\normalsize\mdseries
+              \uppercase\@xp{\chaptername}\enspace\thechapter}
+          \vskip 3pc}}\hskip\leftskip\fi
+%     #1\par \endgroup
+    \uppercase{#1}\par \endgroup
+%  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \skip@50\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+
+\def\@makeschapterhead#1{\global\topskip 7.5pc\relax
+  \begingroup
+%  \fontsize{\@xivpt}{18}\bfseries\centering
+  \fontsize{\@xiipt}{18}\bfseries\centering
+%  #1\par \endgroup
+\uppercase{#1}\par \endgroup
+%  \skip@34\p@ \advance\skip@-\normalbaselineskip
+  \skip@50\p@ \advance\skip@-\normalbaselineskip
+  \vskip\skip@ }
+
+% Here is the {headings} definition, which is used
+\def\ps@headings{\ps@empty
+ \def\@evenhead{\normalfont\fontsize{10}{13\p@}\selectfont
+    \rlap{\thepage}\hfil
+%\fontsize{7}{8\p@}\selectfont\leftmark{}{} \hfil}%
+\normalsize\textsc{\leftmark{}{}} \hfil}%
+ \def\@oddhead{\normalfont\fontsize{7}{8\p@}\selectfont
+    \hfil\normalsize\textsc{\rightmark{}{}} \hfil
+    \fontsize{10}{13\p@}\selectfont \llap{\thepage}}%
+  \let\@mkboth\markboth
+}
+
+%%%%%%%%%%%%%% For the CONTENTS
+
+\setcounter{tocdepth}{2}    % ynm
+\def\contentsname{CONTENTS}
+
+\def\l@section{\@tocline{0}{0pt}{1pc}{}{}}
+\def\l@chapter{\@tocline{0}{8pt plus1pt}{0pt}{}{}}
+
+\def\@starttoc#1#2{%
+  \begingroup
+  \let\secdef\@gobbletwo \chapter
+  \let\@secnumber\@empty % for \@tocwrite and \chaptermark
+  \ifx\contentsname#2%
+  \else \@tocwrite{chapter}{#2}\fi
+  \typeout{#2}\@xp\chaptermark\@xp{#2}%
+  \@makeschapterhead{#2}\@afterheading
+  \makeatletter
+  \@input{\jobname.#1}%
+  \if@filesw
+    \@xp\newwrite\csname tf@#1\endcsname
+    \immediate\@xp\openout\csname tf@#1\endcsname \jobname.#1\relax
+  \fi
+  \global\@nobreakfalse \endgroup
+  \newpage
+}
+
+% Make the TOC entries for chapters small caps
+\renewcommand{\tocchapter}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\ignorespaces\textsc{#1 #2}.%
+\quad}}\textsc{#3}}
+
+\renewcommand{\tocsection}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\ignorespaces
+%#1 #2.\quad
+\makebox[1.3cm]{#1 #2.}}}#3}
+
+\renewcommand{\tocsubsection}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\ignorespaces
+\hskip 1em{#1 #2.}\hskip .5em}}#3}
+
+\renewcommand{\tocsubsubsection}[3]{%
+  \indentlabel{\@ifnotempty{#2}{\ignorespaces
+\hskip 2em{#1 #2.}\hskip .5em}}#3}
+
+\def\@tocline#1#2#3#4#5#6#7{\relax
+  \ifnum #1>\c@tocdepth % then omit
+  \else
+    \par \addpenalty\@secpenalty\addvspace{#2}%
+    \begingroup \hyphenpenalty\@M
+    \@ifempty{#4}{%
+      \@tempdima\csname r@tocindent\number#1\endcsname\relax
+    }{%
+      \@tempdima#4\relax
+    }%
+    \parindent\z@ \leftskip#3\relax \advance\leftskip\@tempdima\relax
+    \rightskip\@pnumwidth plus1em \parfillskip-\@pnumwidth
+    #5\leavevmode\hskip-\@tempdima #6\relax
+%    \hfil\hbox to\@pnumwidth{\@tocpagenum{#7}}\par
+    \dotfill\hbox to\@pnumwidth{\@tocpagenum{#7}}\par
+    \nobreak
+    \endgroup
+  \fi}
+
+%%%%%%%%%%%%%%%%
+
+\setcounter{secnumdepth}{3} % This is =2 in asl.cls
+\pagestyle{headings}
+
+
+%%%%%% For the title page (ynm)
+
+\def\@draftdate{\today}
+\def\draftnote#1{\long\def\@draftdate{#1}}
+
+\renewcommand\title[1]{%
+\gdef\shorttitle{#1}%
+\gdef\@title{\fontsize{25}{28pt}\bfseries\selectfont\uppercase{#1}}}
+
+\def\authors{}
+
+\renewcommand\author[1]{\g@addto@macro\authors{%
+\vskip .5cm%
+\normalfont\fontsize{14}{16pt}\selectfont\uppercase{#1}\\}}
+
+\renewcommand\address[1]{\g@addto@macro\authors{%
+\normalsize\normalfont\itshape #1}}
+
+\renewcommand\email[1]{\g@addto@macro\authors{%
+\\\normalfont\ttfamily{#1}}}
+
+\long\def\maketitle{
+\thispagestyle{empty}
+\vskip 1cm
+\begin{center}
+\vskip 3.5cm
+\@title
+\vskip 2cm
+\authors
+
+\vspace{\fill}
+\normalfont
+\@draftdate
+\end{center}
+\normalfont\normalsize
+}
+
+%%%%%%%%%%----------- References
+
+\def\bibname{References}
+\renewenvironment{thebibliography}[1]{%
+%  \vskip 2pt
+  \@xp\chapter\@xp*\@xp{\bibname}%
+%\chapter*{References}
+\markboth{References}{References}
+% no address at the end
+  \def\and{{\normalfont \lowercase{and}\ }}%
+  \list{[\@arabic\c@enumiv]\ }{%
+        \leftmargin\z@ \labelwidth\z@ \itemindent12\p@
+  \labelsep\z@ \usecounter{enumiv}}%
+  \sloppy \clubpenalty4000\relax \widowpenalty\clubpenalty
+  \sfcode`\.\@m}
+  {\endlist}
+
+\def\@setaddresses{}
+
+%%%%%%%%%%%%%%%%%%%%%%%% eqnarray* eperiment
+
+\@namedef{eqnarray*}{%\let\leftmargini\z@
+\def\@eqncr{\nonumber\@seqncr}\eqnarray}
+\@namedef{endeqnarray*}{\nonumber\endeqnarray}
+
+} % end declareoption aslbook
+
+%----------------------------------------- option xaslbook
+
+\DeclareOption{xaslbook}{%
+\ExecuteOptions{xfonts,aslbook}
+} % end declareoption xaslbook
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %----------------------------------------- option endnotes
 
 
 %*********************** Changes from amsart ***********************%
+%-----------------------------------------------------
+
+% \locationtoks is used by aslprod for meetings
+
+\newtoks\locationtoks
+\locationtoks={}
+%------------------------------------------
 
 % The changes from amsart are noted and commented out
 
@@ -4685,8 +5060,12 @@ No toctitle!^^J\stop}}
 
 %------------------------------- Sectioning commands
 
+% \ycleardoublepage, empty pagestyle on the blank
+\def\ycleardoublepage{\clearpage\if@twoside \ifodd\c@page%
+\else\thispagestyle{empty}
+    \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 
-% For conditionals 
+% For conditionals
 % \iete{#1}{#2}{#3} =
 %    if #1 is empty then #2 else #3.
 % Uses settowidth to avoid expanding #1
@@ -4699,6 +5078,9 @@ No toctitle!^^J\stop}}
 
 % Section, has the \S symbol in \thesection
 % while the deeper environments do not
+% Correction to handle \appendix
+% We rename \S so we can change it
+\def\aslsectionmark{\S}
 
 \renewcommand\thesection       {\arabic{section}}
 \renewcommand\thesubsection    {\thesection.\arabic{subsection}}
@@ -4718,8 +5100,14 @@ No toctitle!^^J\stop}}
  \if@nobreak \everypar{}\else
      \addpenalty\@secpenalty\addvspace\@tempskipa\fi
  \@ifstar{\@dblarg{\@sect{#1}{\@m}{#3}{#4}{#5}{#6}}}%
-         {\@dblarg{\@sect{#1}{#2}{#3\S}{#4}{#5}{#6}}}%    % \S here
+         {\@dblarg{\@sect{#1}{#2}{#3\aslsectionmark}{#4}{#5}{#6}}}%
+% \S here
 }
+
+\def\appendix{\par\c@section\z@ \c@subsection\z@
+   \let\sectionname\appendixname
+   \let\aslsectionmark\empty  % debug
+   \def\thesection{\@Alph\c@section}}
 
 \def\subsection{\@startsection{subsection}{2}%
  {\parindent}{2\p@}{-.5em}%      (some vertical space above)
@@ -4739,7 +5127,7 @@ No toctitle!^^J\stop}}
     \refstepcounter{#1}%
     \edef\@svsec{\ifnum#2<\@m
        \@ifundefined{#1name}{}{%
-         \ignorespaces\csname #1name\endcsname\space}\fi 
+         \ignorespaces\csname #1name\endcsname\space}\fi
        \@nx\textup{%
       \@nx\@secnumfont
           \csname the#1\endcsname.}\enspace
@@ -4752,12 +5140,12 @@ No toctitle!^^J\stop}}
     \endgroup
     \ifnum#2>\@m \else \@tocwrite{#1}{#8}\fi
   \else
-   \def\@svsechd{#6\hskip #3\@svsec 
+   \def\@svsechd{#6\hskip #3\@svsec
 % Change the next two lines to correct horizontal spacing
 % in the case of \section{}
 % Use \iete rather than \@ifempty to avoid expansion
-%    \@ifnotempty{#8}{\ignorespaces#8\unskip 
-%    \@addpunct.}%                    
+%    \@ifnotempty{#8}{\ignorespaces#8\unskip
+%    \@addpunct.}%
 %     \iete{#8}{\hskip -.4em}{\ignorespaces#8\unskip\@addpunct.}%
     \iete{#8}{\hskip -.4em}{\ignorespaces#8\unskip\@addpunct.}%
     \ifnum#2>\@m \else \@tocwrite{#1}{#8}\fi
@@ -5331,7 +5719,7 @@ No toctitle!^^J\stop}}
 
 % REDEFINITION OF THE \cite MACRO    (See a discussion above.)
 %
-% Store the old \cite and \@citex 
+% Store the old \cite and \@citex
 % and put this in a command
 \let\oldcite\cite
 \let\old@citex\@citex
@@ -5459,11 +5847,15 @@ which is highly recommended for ASL publications!^^J
 % entry name (that is, a comma-separated list of entry names is not
 % supported). Moreover, there is no optional argument.
 \def\citeauth#1{%     For the list of author(s).
+\nocite{#1}
+% ynm 4/1/2002, fixing bug noticed by Richard Zach. Produces citation.
 \@ifundefined{gu@#1}
    {\cite@nondef{#1}}
    {\csname gu@#1\endcsname}}
 
 \def\citeyear#1{%     For the year + year tag label.
+\nocite{#1}
+% ynm 4/1/2002, fixing bug noticed by Richard Zach. Produces citation.
 \@ifundefined{yr@#1}
    {\cite@nondef{#1}}
    {\csname yr@#1\endcsname\csname yt@#1\endcsname}}
@@ -5582,7 +5974,7 @@ which is highly recommended for ASL publications!^^J
 \def\@wrap@final@label@id#1{,\@cispace#1]}
 \def\@wrap@inner@label@id#1{,\@cispace#1}
 \def\@wrap@label@pre#1{\if@sol\else],\space\fi[#1}
-}
+}  % End declareoption{bibay1}
 
 
 %%%==3D. Option bibay2 (author-year style) ============================
@@ -5609,7 +6001,55 @@ which is highly recommended for ASL publications!^^J
 \def\@wrap@final@label@id#1{[#1]}
 \def\@wrap@inner@label@id#1{[#1],\space}
 \def\@wrap@label@pre#1{#1\@cispace}
+} % End declareoption{bibay2}
+
+%%% Option bibay3 (author-year style) ============================
+%% Best for books
+%% From the Descriptive set theory book
+\DeclareOption{bibay3}{
+% for the list of references:
+\guysdisappear
+\yeardisappear \ynm{This is from the later style}
+\setlength{\intergroupsep}{2ex}
+\renewcommand{\bibfitem}[6]{%
+     \vspace{\intergroupsep}%
+     \let\oldguy=\guy%
+     \def\guy##1##2##3##4##5{##2 ##3\ignorespaces ##4}%
+     \item[\hspace*{-\itemindent}\textsc{#2}]%
+     \nopagebreak% !! Need something else.. This doesn't work !!
+     \let\guy=\oldguy%
+     \@bib@item{#1}{#2}{#3}{#4}{#5}{#6}}
+\def\composelist#1#2#3#4#5{#3#4}
+\def\@wrap@list#1{[#1]}
+
+% for the citations:
+\def\composecitepre#1#2#3#4#5#6{#2}
+\def\composeciteid#1#2#3#4#5#6{#3#4}
+\def\@wrap@cite#1{#1}
+\def\@wrap@first@label#1{#1}
+\def\@wrap@inner@label#1{#1}
+\def\@wrap@alone@label@id#1{[#1]}
+\def\@wrap@first@label@id#1{[#1],\space}
+\def\@wrap@final@label@id#1{[#1]}
+\def\@wrap@inner@label@id#1{[#1],\space}
+\def\@wrap@label@pre#1{#1\@cispace}
+\newcommand{\shortcite}[1]{%
+     \let\old@wrap@alone@label@pre=\@wrap@alone@label@pre%
+     \let\old@wrap@first@label@pre=\@wrap@first@label@pre%
+     \let\old@wrap@final@label@pre=\@wrap@final@label@pre%
+     \let\old@wrap@inner@label@pre=\@wrap@inner@label@pre%
+     \def\@wrap@alone@label@pre##1{}%
+     \def\@wrap@first@label@pre##1{}%
+     \def\@wrap@final@label@pre##1{}%
+     \def\@wrap@inner@label@pre##1{}%
+     \cite{#1}%
+     \let\@wrap@alone@label@pre=\old@wrap@alone@label@pre%
+     \let\@wrap@first@label@pre=\old@wrap@first@label@pre%
+     \let\@wrap@final@label@pre=\old@wrap@final@label@pre%
+     \let\@wrap@inner@label@pre=\old@wrap@inner@label@pre%
 }
+} % End declareoption{bibay3}
+
 
 %%%%%%%%%%% Bib styles other than asl.bst
 
@@ -6035,11 +6475,11 @@ customized for asl.cls by Christos Kapoutsis^^J^^J}
 % For arithmetic subtraction
 \newcommand\dotminus{\mathop{\mbox{$-^{\hspace{-.5em}\cdot}\,\,$}}}
 
-% For the boldface \Delta, \Pi,. in descriptive set theory, to
-% make them more noticeably different from the lightface
-
 % For the boldface symbols \Pi, \Sigma, \Delta, etc. in DST
-\newcommand\tboldsymbol[1]{\underset{\widetilde{}}{\boldsymbol{#1}}}
+% 1/09/01 Adjusted to take subscripts and superscripts
+\newcommand\tboldsymbol[1]{%
+\protect\raisebox{0pt}[0pt][0pt]{%
+$\underset{\widetilde{}}{\boldsymbol{#1}}$}\mbox{\hskip 1pt}}
 
 % To get McCusker to print correctly in the title, headings,
 % and Tables of contents, use \author{Guy \Mc Cusker}
@@ -6069,7 +6509,7 @@ $\joinrel\Rightarrow\,$}}
 \def\ok{\marginpar{\text{OK?}}}
 
 % Use to leave space so lines line up
-% This should have the sanme effect as \phantom
+% This should have the sanme effect as \phantom, but works in text mode too
 % but is left here for compatibility
 \newlength{\ypushlen}
 \def\ypush#1{\settowidth{\ypushlen}{#1}\hspace*{\ypushlen}}
@@ -6080,6 +6520,19 @@ $\joinrel\Rightarrow\,$}}
 \newlength{\yboxlen}
 \def\ytext#1#2{\settowidth{\yboxlen}{#1}%
 \makebox[\yboxlen][r]{\normalfont #2}}
+
+% Change, June 2002, ynm
+% To change the placing of tags in the middle of a document
+% useful especially in conference proceedings
+% but also for single equations sometimes with \tag
+\let\old@eqnnum\@eqnnum
+\newcommand\tagsleft{\tagsleft@true%
+\gdef\@eqnnum{\hb@xt@.01\p@{}%
+                      \rlap{\normalfont\normalcolor
+                        \hskip -\displaywidth(%
+\ifasl@tag\tagsymbol\global\asl@tagfalse\else\theequation\fi%
+)}}}
+\newcommand\tagsright{\tagsleft@false\let\@eqnnum\old@eqnnum}
 
 % Eqnarray modification, tighter and with a third column
 %%% labels work fine, but the \label command must be given
@@ -6094,17 +6547,17 @@ $\joinrel\Rightarrow\,$}}
 
 \def\labeltagerr{%
 \errmessage{^^J
-The sequence label{..} 
+The sequence label{..}
 tag{..}^^J
 is not allowed in the eqnarray environment^^J
-give tag{..} 
+give tag{..}
 label{..} instead to get right numbering^^J
 Hit X to stop and correct the error^^J
 }}
 
 % to detect if \tag has been given
 % the command \asl@tagfalse is never needed, because of the locality
-% of the \@@eqnrc redefinition, which works only for the line 
+% of the \@@eqnrc redefinition, which works only for the line
 % in which the tag occurs
 \newif\ifasl@tag
 
@@ -6143,11 +6596,11 @@ Hit X to stop and correct the error^^J
    $$\everycr{}\halign to\displaywidth\bgroup%
 \hskip\@centering$\displaystyle\tabskip\z@skip%
 \hskip \leftmargini{##}$\@eqnsel&%
- \global\@eqcnt\@ne\hskip.5\arraycolsep\hfil$\displaystyle{##}$\hfil%
-&\hskip .5\arraycolsep$\displaystyle{##}\hskip \leftmargini$\hfil%
+ \global\@eqcnt\@ne\hskip.5\labelsep\hfil$\displaystyle{##}$\hfil%
+&\hskip .5\labelsep$\displaystyle{##}\hskip \leftmargini$\hfil%
 &\global\@eqcnt\tw@%
 $\displaystyle{##}$\hfil\tabskip\@centering%
-&\global\@eqcnt\thr@@\hb@xt@\z@\bgroup\hss##\egroup% 
+&\global\@eqcnt\thr@@\hb@xt@\z@\bgroup\hss##\egroup%
 \gdef\@currentlabel{\p@equation\theequation}%
 \labelgivenfalse
 \tabskip\z@skip%
@@ -6175,7 +6628,7 @@ $\displaystyle{##}$\hfil\tabskip\@centering%
 \@namedef{endendproofeqnarray*}{%
 \global\proofend\endeqnarray}
 
-% The next command can be used to make the entry not count 
+% The next command can be used to make the entry not count
 % in the centering, for example
 % \begin{eqnarray}
 % a &=& b    &\text{comment}\\
@@ -6217,6 +6670,10 @@ $\displaystyle{##}$\hfil\tabskip\@centering%
 \def\papertype#1{}
 \def\revauthor#1{}
 \def\revdate#1{}
+\def\ladate#1{}
+\def\dn#1{}
+\def\submitformat#1{}
+
 
 \def\@location{}   % There is also a change in the definition of \location
 
@@ -6233,6 +6690,13 @@ $\displaystyle{##}$\hfil\tabskip\@centering%
 \DeclareFontShape{OT1}{xgt}{b}{n}{
    <-> gamatb
 }{}
+
+%%%%%%%%%%%%%%%%%% debug fonttest ynm 3/17/01 activate thess
+%\DeclareFontShape{OT1}{xgt}{bx}{n}{
+%   <-> gamatb
+%}{}
+
+%%%%%%%%%%%%%%%%%% debug fonttest
 
 \DeclareFontShape{OT1}{xgt}{b}{sc}{
    <-> sub * xgt/b/n                    % corr. 1/16/2000, ynm
