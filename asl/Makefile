@@ -6,7 +6,7 @@ INCLUDE=./include
 PANDOC=/tmp/pandoc-templates
 TEMPLATE=asl
 SRC=./
-INPUT=abstract.md 
+INPUT=*.md 
 BIB=./library.bib
 NAME=submission
 
@@ -34,6 +34,9 @@ tex: prepare $(SRC)/*.md
 		--template=$(PANDOC)/$(TEMPLATE)/$(TEMPLATE).pandoc-template \
 		--highlight-style=pygments \
 		--latex-engine=pdflatex \
+		-H $(INCLUDE)/header.tex \
+		-B $(INCLUDE)/before.tex \
+		-A $(INCLUDE)/after.tex \
 		$(SRC)/$(INPUT) 
 
 bib: tex  
