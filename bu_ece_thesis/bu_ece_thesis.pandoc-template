@@ -117,6 +117,10 @@ $endfor$
 %==========================================================================%
 \begin{document}
 
+$for(include-before)$
+$include-before$
+$endfor$
+
 % The preliminary pages
 % This file contains all the necessary setup and commands to create
 % the preliminary pages according to the buthesis.sty option.
