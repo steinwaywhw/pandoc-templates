@@ -265,6 +265,15 @@ $if(abbrv)$
 \cleardoublepage
 $endif$
 
+% List of Abbrevs is NOT optional (Martha Wellman likes all abbrevs listed)
+$if(typography)$
+\chapter*{Typography}
+\begin{center}
+\input{$typography$}
+\end{center}
+\cleardoublepage
+$endif$
+
 % END OF THE PRELIMINARY PAGES
 
 \newpage
