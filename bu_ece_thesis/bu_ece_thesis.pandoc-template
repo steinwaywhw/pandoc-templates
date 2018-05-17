@@ -302,8 +302,8 @@ $body$
 % \include{3_Conclusion/conclusion}
 % \cleardoublepage
 
-%\appendix
 $if(appendix)$
+\appendix
 \begin{appendices}
 \include{$appendix$}
 \end{appendices}
