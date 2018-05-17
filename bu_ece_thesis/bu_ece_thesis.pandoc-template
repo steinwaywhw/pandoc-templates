@@ -29,7 +29,7 @@
 %==========================================================================%
 %%% graphicx and pdf creation
 \usepackage{graphicx}
-% \usepackage{appendix}
+\usepackage{appendix}
 %\usepackage{psfrag}
 %\DeclareGraphicsExtensions{.eps}   % extension for included graphics
 %\usepackage{thumbpdf}              % thumbnails for ps2pdf
@@ -304,11 +304,11 @@ $body$
 
 $if(appendix)$
 \cleardoublepage
-\appendix
-% \begin{appendices}
+% \appendix
+\begin{appendices}
 \include{$appendix$}
-% \end{appendices}
-\cleardoublepage
+\end{appendices}
+% \cleardoublepage
 $endif$
 %==========================================================================%
 % Bibliography
