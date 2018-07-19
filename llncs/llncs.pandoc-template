@@ -29,18 +29,18 @@ $endfor$
 \providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % hyperref
-% \usepackage{hyperref}
-% \hypersetup{
-%   unicode=true,
-%   pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
-%   pdftitle={$title$},
-%   pdfauthor={$author$},
-%   colorlinks=$if(colorlinks)$$colorlinks$$else$false$endif$,
-%   linkcolor=$if(linkcolor)$$linkcolor$$else$red$endif$,
-%   citecolor=$if(citecolor)$$citecolor$$else$green$endif$,
-%   urlcolor=$if(urlcolor)$$urlcolor$$else$cyan$endif$,
-%   breaklinks=true
-% }
+\usepackage{hyperref}
+\hypersetup{
+  unicode=true,
+  pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+  pdftitle={$title$},
+  pdfauthor={$author$},
+  colorlinks=$if(colorlinks)$$colorlinks$$else$false$endif$,
+  linkcolor=$if(linkcolor)$$linkcolor$$else$red$endif$,
+  citecolor=$if(citecolor)$$citecolor$$else$green$endif$,
+  urlcolor=$if(urlcolor)$$urlcolor$$else$cyan$endif$,
+  breaklinks=true
+}
 
 % \usepackage{ifxetex,ifluatex}
 % \usepackage{fixltx2e} % provides \textsubscript
