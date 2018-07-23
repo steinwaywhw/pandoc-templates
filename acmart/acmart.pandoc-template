@@ -66,17 +66,17 @@
 
 \usepackage{amssymb,amsmath}
 \usepackage[usenames, dvipsnames]{color}
-\usepackage{hyperref}
+% \usepackage{hyperref}
 \hypersetup{
-  unicode=true,
-  pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$},
+  % unicode=true,
+  pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$}
   pdftitle={$short-title$},
   pdfauthor={$short-author$},
-  colorlinks=$if(colorlinks)$$colorlinks$$else$false$endif$,
-  linkcolor=$if(linkcolor)$$linkcolor$$else$red$endif$,
-  citecolor=$if(citecolor)$$citecolor$$else$green$endif$,
-  urlcolor=$if(urlcolor)$$urlcolor$$else$cyan$endif$,
-  breaklinks=true
+  % colorlinks=$if(colorlinks)$$colorlinks$$else$false$endif$,
+  % linkcolor=$if(linkcolor)$$linkcolor$$else$red$endif$,
+  % citecolor=$if(citecolor)$$citecolor$$else$green$endif$,
+  % urlcolor=$if(urlcolor)$$urlcolor$$else$cyan$endif$,
+  % breaklinks=true
 }
 
 \usepackage{ifxetex,ifluatex}
