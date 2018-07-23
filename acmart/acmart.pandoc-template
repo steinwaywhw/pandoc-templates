@@ -79,6 +79,18 @@
   % breaklinks=true
 }
 
+
+
+% code highlighting
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+
+% header-includes
+$for(header-includes)$
+$header-includes$
+$endfor$
+
 \usepackage{ifxetex,ifluatex}
 \usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
@@ -98,17 +110,6 @@
 % \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-
-% code highlighting
-$if(highlighting-macros)$
-$highlighting-macros$
-$endif$
-
-% header-includes
-$for(header-includes)$
-$header-includes$
-$endfor$
-
 
 \begin{document}
 
