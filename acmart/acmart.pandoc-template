@@ -70,8 +70,8 @@
 \hypersetup{
   % unicode=true,
   pdfkeywords={$for(keywords)$$keywords$$sep$; $endfor$}
-  pdftitle={$short-title$},
-  pdfauthor={$short-author$},
+  pdftitle={$title$},
+  pdfauthor={$for(author)$$author.name$$sep$, $endfor$},
   % colorlinks=$if(colorlinks)$$colorlinks$$else$false$endif$,
   % linkcolor=$if(linkcolor)$$linkcolor$$else$red$endif$,
   % citecolor=$if(citecolor)$$citecolor$$else$green$endif$,
