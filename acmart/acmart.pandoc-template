@@ -65,7 +65,7 @@
 
 
 \usepackage{amssymb,amsmath}
-\usepackage[usenames, dvipsnames]{color}
+% \usepackage[usenames, dvipsnames]{color}
 % \usepackage{hyperref}
 \hypersetup{
   % unicode=true,
