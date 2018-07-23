@@ -151,7 +151,7 @@ $for(author)$
                                         %% can be repeated if necessary
 % \orcid{nnnn-nnnn-nnnn-nnnn}             %% \orcid is optional
 \affiliation{
-  $if(author.position)$\position{$author.position$}$endif$
+  $if(author.position)$\position{$author.position$}$else$%$endif$
   \department{$author.department$}              %% \department is recommended
   \institution{$author.institution$}            %% \institution is required
   \streetaddress{$author.street$}
