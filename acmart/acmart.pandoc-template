@@ -12,15 +12,13 @@
 \documentclass[$for(classoption)$$classoption$$sep$,$endfor$]{$if(documentclass)$$documentclass$$else$acmart$endif$}
 \settopmatter{printfolios=true,printccs=false,printacmref=false}
 
-
-
 %% Conference information
 %% Supplied to authors by publisher for camera-ready submission;
 %% use defaults for review submission.
-\acmConference[AGERE'18]{ACM SIGPLAN International Workshop on Programming Based on Actors, Agents, and Decentralized Control}{October 05--07, 2018}{Boston, MA, USA}
-\acmYear{2018}
-\acmISBN{} % \acmISBN{978-x-xxxx-xxxx-x/YY/MM}
-\acmDOI{} % \acmDOI{10.1145/nnnnnnn.nnnnnnn}
+\acmConference[$acm.conf.short$]{$acm.conf.full$}{$acm.conf.date$}{$acm.conf.place$}
+\acmYear{$acm.year$}
+\acmISBN{$acm.isbn$} % \acmISBN{978-x-xxxx-xxxx-x/YY/MM}
+\acmDOI{$acm.doi$} % \acmDOI{10.1145/nnnnnnn.nnnnnnn}
 \startPage{1}
 
 %% Copyright information
@@ -224,7 +222,7 @@ $abstract$
 
 %% Keywords
 %% comma separated list
-\keywords{$for(keywords)$$keywords$$sep$,$endfor$}  %% \keywords are mandatory in final camera-ready submission
+\keywords{$for(keywords)$$keywords$$sep$, $endfor$}  %% \keywords are mandatory in final camera-ready submission
 
 
 %% \maketitle
