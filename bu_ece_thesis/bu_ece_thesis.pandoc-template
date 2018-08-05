@@ -323,6 +323,13 @@ $endif$
 %==========================================================================%
 % Curriculum Vitae
 $if(cv)$
+\addcontentsline{toc}{chapter}{Curriculum Vitae}
+\thispagestyle{empty}
+\begin{center}
+{\LARGE {\bf CURRICULUM VITAE}}\\
+\vspace{0.5in}
+{\large {\bf $author$}}
+\end{center}
 \include{$cv$} 
 $endif$
 
