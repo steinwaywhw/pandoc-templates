@@ -330,7 +330,7 @@ $if(cv)$
 \vspace{0.5in}
 {\large {\bf $author$}}
 \end{center}
-\include{$cv$} 
+\input{$cv$} 
 $endif$
 
 %==========================================================================%
